@@ -8,6 +8,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
+The first time I ran the game, the interface loaded, but several parts of the game did not behave the way I expected. First, when I tried to start a new game, I expected everything to reset cleanly, but it did not seem to restart the way I expected. Second, I expected the difficulty levels to feel consistent, but the attempts and range did not seem to match the level I selected. Third, I expected the instructions to match the actual game settings, but the displayed number range was confusing and did not always line up with the chosen difficulty.
+
 ---
 
 ## 2. How did you use AI as a teammate?
