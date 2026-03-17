@@ -56,11 +56,13 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 if st.session_state.difficulty != difficulty:
+    # FIX: AI helped trace the range mismatch to difficulty changes, so reset now reuses the selected range.
     st.session_state.difficulty = difficulty
     start_new_game(low, high)
 
 st.subheader("Make a guess")
 
+# FIX: Updated the player-facing text after AI pointed out the UI was ignoring the selected difficulty range.
 st.info(
     f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"

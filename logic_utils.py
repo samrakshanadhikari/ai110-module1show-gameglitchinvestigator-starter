@@ -15,6 +15,7 @@ def parse_guess(raw: str):
 
     Returns: (ok: bool, guess_int: int | None, error_message: str | None)
     """
+    # FIX: Tightened input parsing after AI-assisted review showed decimals were being silently converted.
     if raw is None:
         return False, None, "Enter a guess."
 
@@ -37,6 +38,7 @@ def check_guess(guess, secret):
 
     outcome examples: "Win", "Too High", "Too Low"
     """
+    # FIX: Refactored this comparison into logic_utils.py and corrected the hint direction after reviewing the bug with AI.
     if guess == secret:
         return "Win", "🎉 Correct!"
 
