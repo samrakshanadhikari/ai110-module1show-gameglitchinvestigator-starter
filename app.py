@@ -2,6 +2,16 @@ import random
 import streamlit as st
 from logic_utils import check_guess, get_range_for_difficulty, parse_guess, update_score
 
+
+def start_new_game(low: int, high: int):
+    # FIX: Consolidated reset logic after debugging New Game state issues with AI assistance.
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.attempts = 0
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
+
+
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
 st.title("🎮 Game Glitch Investigator")
@@ -27,11 +37,14 @@ low, high = get_range_for_difficulty(difficulty)
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
+if "difficulty" not in st.session_state:
+    st.session_state.difficulty = difficulty
+
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -41,6 +54,10 @@ if "status" not in st.session_state:
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+if st.session_state.difficulty != difficulty:
+    st.session_state.difficulty = difficulty
+    start_new_game(low, high)
 
 st.subheader("Make a guess")
 
@@ -70,8 +87,8 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    st.session_state.attempts = 0
-    st.session_state.secret = random.randint(low, high)
+    # FIX: New game now resets using the current difficulty range and clears stale state.
+    start_new_game(low, high)
     st.success("New game started.")
     st.rerun()
 
@@ -92,13 +109,7 @@ if submit:
         st.error(err)
     else:
         st.session_state.history.append(guess_int)
-
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
-
-        outcome, message = check_guess(guess_int, secret)
+        outcome, message = check_guess(guess_int, st.session_state.secret)
 
         if show_hint:
             st.warning(message)
