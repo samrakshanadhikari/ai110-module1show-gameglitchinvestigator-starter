@@ -25,13 +25,17 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+This project is a Streamlit number guessing game that started with several logic and state-related bugs. The purpose of the project was to investigate the broken behavior, understand how the AI-generated code was failing, and then repair it using testing and careful debugging.
+
+Some of the main bugs I found were incorrect hint behavior, a displayed range that did not always match the selected difficulty, inconsistent New Game resets, and unstable state during reruns. I also found that some of the original tests did not match the actual function behavior, which made verification harder until they were corrected.
+
+To fix the project, I moved the reusable game logic into `logic_utils.py`, corrected the hint and parsing logic, improved state handling in `app.py`, and adjusted the difficulty design so it scaled more logically. I verified the fixes by running `pytest` successfully and manually checking the game in Streamlit.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+### Fixed Winning Game
+![Screenshot of the fixed winning game](images/fixed-game-win.png)
+
 
 ## 🚀 Stretch Features
 
