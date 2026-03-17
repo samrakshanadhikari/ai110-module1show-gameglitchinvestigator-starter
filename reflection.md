@@ -36,11 +36,12 @@ I decided a bug was really fixed only after the code behavior matched both the t
 - In your own words, explain why the secret number kept changing in the original app.
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 - What change did you make that finally gave the game a stable secret number?
+I learned that the original app was unstable because Streamlit reruns the script after user interactions, so values can reset if they are not stored properly. The secret number kept changing because the app logic did not consistently preserve all of the game state across those reruns and reset paths. I would explain Streamlit reruns to a friend as the whole script being re-executed after each interaction, while `st.session_state` acts like memory that keeps important values alive between reruns. The change that finally made the game stable was resetting and reusing the secret number, attempts, score, and history through session state instead of letting the app rebuild them inconsistently.
 
 ---
 
 ## 5. Looking ahead: your developer habits
-
+One habit I want to reuse is turning repeated game behavior into testable helper functions before trying to debug everything in the UI. I also want to keep using small commits and branches so I can separate one bug fix from the next and avoid losing track of what changed. Next time I work with AI on a coding task, I would ask for narrower suggestions and verify them sooner instead of assuming the first design proposal is good enough. This project changed the way I think about AI-generated code because it showed me that AI can speed up debugging, but it still needs human judgment, testing, and design review before the code is trustworthy.
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
