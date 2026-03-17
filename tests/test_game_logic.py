@@ -12,6 +12,11 @@ def test_guess_too_low():
 def test_range_for_easy():
     assert get_range_for_difficulty("Easy") == (1, 20)
 
+
+def test_range_scales_with_difficulty():
+    assert get_range_for_difficulty("Normal") == (1, 50)
+    assert get_range_for_difficulty("Hard") == (1, 100)
+
 def test_parse_guess_rejects_decimal_input():
     assert parse_guess("4.2") == (False, None, "That is not a whole number.")
 
